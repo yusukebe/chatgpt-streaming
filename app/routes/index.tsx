@@ -33,6 +33,7 @@ export const route = defineRoute<Env>((app) => {
     })
 
     c.header('x-content-type-options', 'nosniff')
+    c.header('content-type', 'text/plain')
     return c.stream(async (stream) => {
       for await (const message of chatStream) {
         await stream.write(message.choices[0]?.delta.content ?? '')
