@@ -72,7 +72,7 @@ export default function Component(props: { baseURL: string }) {
         <form onSubmit={handleSubmit}>
           <input
             type="text"
-            style={{ width: '300px', marginRight: '2px' }}
+            style={{ width: '400px', marginRight: '2px' }}
             value={userInput}
             onChange={(e) => setUserInput((e.target as any).value)}
           />

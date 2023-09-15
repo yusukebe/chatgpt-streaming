@@ -20,9 +20,13 @@ const handler: LayoutHandler = ({ children, head }) => {
       </head>
       <body>
         <div className="wrapper">
+          <h1>Hello ChatGPT!</h1>
           {children}
           <footer style={{ marginTop: '2rem' }}>
-            <small>© 2023 your name</small>
+            <small>
+              © 2023 Yusuke Wada
+              <br /> <a href="https://github.com/yusukebe/chatgpt-streaming">See the code</a>
+            </small>
           </footer>
         </div>
       </body>

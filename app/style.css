@@ -21,4 +21,10 @@ a:hover {
 pre {
 	white-space: pre-wrap;
   font-weight: bold;
+  font-size: large;
+}
+
+footer {
+  border-top: #efefef solid 1px;
+  padding: 0.5rem 2rem 0 0;
 }

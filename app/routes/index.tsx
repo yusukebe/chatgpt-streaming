@@ -45,7 +45,6 @@ export const route = defineRoute<Env>((app) => {
 export default function Index(c: Context<Env>) {
   return (
     <div>
-      <h1>Hello ChatGPT!</h1>
       <p>Me: {PROMPT('')[0].content}</p>
       <Component baseURL={c.env.BASE_URL} />
     </div>
