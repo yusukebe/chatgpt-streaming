@@ -1,0 +1,7 @@
+.dev.vars
+
+pnpm-lock.yaml
+dist
+node_modules
+
+*.tgz
