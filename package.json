@@ -12,7 +12,7 @@
   "dependencies": {
     "@hono/vite-dev-server": "^0.0.7",
     "@sonikjs/react": "^0.0.4",
-    "hono": "file:hono-3.6.0.tgz",
+    "hono": "3.7.0-rc.1",
     "openai": "^4.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
