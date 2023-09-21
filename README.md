@@ -19,15 +19,17 @@ export const route = defineRoute<Env>((app) => {
   app.post('/api', async (c) => {
     const body = await c.req.json<{ message: string }>()
 
-    const openai = new OpenAI({ apiKey: c.env.OPENAI_API_KEY })
+    const openai = new OpenAI({
+      apiKey: c.env.OPENAI_API_KEY
+    })
+
     const chatStream = await openai.chat.completions.create({
       messages: PROMPT(body.message),
       model: 'gpt-3.5-turbo',
       stream: true
     })
 
-    c.header('x-content-type-options', 'nosniff')
-    return c.stream(async (stream) => {
+    return c.streamText(async (stream) => {
       for await (const message of chatStream) {
         await stream.write(message.choices[0]?.delta.content ?? '')
       }
