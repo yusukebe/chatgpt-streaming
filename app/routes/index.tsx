@@ -5,6 +5,7 @@ import { OpenAI } from 'openai'
 type Env = {
   Bindings: {
     OPENAI_API_KEY: string
+    OPENAI_BASE_URL: string
     BASE_URL: string
   }
 }
@@ -25,7 +26,14 @@ export const route = defineRoute<Env>((app) => {
   app.post('/api', async (c) => {
     const body = await c.req.json<{ message: string }>()
 
-    const openai = new OpenAI({ apiKey: c.env.OPENAI_API_KEY })
+    const openAIBaseUrl = c.env.OPENAI_BASE_URL !== '' ? c.env.OPENAI_BASE_URL : 'https://api.openai.com/v1'
+    console.log(`Using ${openAIBaseUrl} as a base URL.`)
+
+    const openai = new OpenAI({
+      apiKey: c.env.OPENAI_API_KEY,
+      baseURL: openAIBaseUrl
+    })
+
     const chatStream = await openai.chat.completions.create({
       messages: PROMPT(body.message),
       model: 'gpt-3.5-turbo',

@@ -15,6 +15,7 @@ export default defineConfig({
         cf: {
           bindings: {
             OPENAI_API_KEY: process.env.OPENAI_API_KEY ?? '',
+            OPENAI_BASE_URL: process.env.OPENAI_BASE_URL ?? '',
             BASE_URL: 'http://localhost:5173'
           }
         }
