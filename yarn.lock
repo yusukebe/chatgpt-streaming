@@ -882,10 +882,10 @@ has-flag@^3.0.0:
   resolved "https://registry.yarnpkg.com/has-flag/-/has-flag-3.0.0.tgz#b5d454dc2199ae225699f3467e5a07f3b955bafd"
   integrity sha512-sKJf1+ceQBr4SMkvQnBDNDtf4TXpVhVGateu0t918bl30FnbE2m4vNLX+VWe/dpjlb+HugGYzW7uQXH98HPEYw==
 
-hono@3.7.0-rc.2:
-  version "3.7.0-rc.2"
-  resolved "https://registry.yarnpkg.com/hono/-/hono-3.7.0-rc.2.tgz#bcc3104564aac3853ac1949037e4f6acd8531580"
-  integrity sha512-rYjefZkDpemGi9cTnjNh/7sbZulk98YMYx3k+yCPXGJRmjQW+eRCS5A35KXhcElEw8q076yap79ZRR6lTNQBWw==
+hono@^3.7.0:
+  version "3.7.0"
+  resolved "https://registry.yarnpkg.com/hono/-/hono-3.7.0.tgz#6e42592069fd24aced4fa7072013771a324bc9f5"
+  integrity sha512-tqhUslEbdAyWCU1a2jeoytwdmS971eIoB3IklTZRVQz+SjSyOQixrkp5CVw7chYwanYE3UMEyr/uAR2HOuMdhw==
 
 http-cache-semantics@^4.1.0:
   version "4.1.1"
