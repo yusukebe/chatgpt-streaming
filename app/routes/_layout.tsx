@@ -4,7 +4,7 @@ const handler: LayoutHandler = ({ children, head }) => {
   return (
     <html lang="en">
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, user-scalable=no" />
         <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css" />
         {import.meta.env.PROD ? (

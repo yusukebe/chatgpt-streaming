@@ -4,10 +4,8 @@ a:hover {
 
 pre {
 	white-space: pre-wrap;
-  font-weight: bold;
-  font-size: large;
 }
 
-textarea {
+input {
   touch-action: manipulation
 }
