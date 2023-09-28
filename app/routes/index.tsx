@@ -10,21 +10,14 @@ type Env = {
   }
 }
 
-const PROMPT = (message: string) => [
-  {
-    role: 'system' as const,
-    content:
-      'You are a great Web developer. If you receive a question about Web-related technologies, you can answer it.'
-  },
-  {
-    role: 'user' as const,
-    content: message
-  }
-]
+type Message = {
+  role: 'system' | 'user'
+  content: string
+}
 
 export const route = defineRoute<Env>((app) => {
   app.post('/api', async (c) => {
-    const body = await c.req.json<{ message: string }>()
+    const body = await c.req.json<{ messages: Message[] }>()
 
     const openAIBaseUrl = c.env.OPENAI_BASE_URL !== '' ? c.env.OPENAI_BASE_URL : 'https://api.openai.com/v1'
     console.log(`Using ${openAIBaseUrl} as a base URL.`)
@@ -35,14 +28,20 @@ export const route = defineRoute<Env>((app) => {
     })
 
     const chatStream = await openai.chat.completions.create({
-      messages: PROMPT(body.message),
+      messages: body.messages,
       model: 'gpt-3.5-turbo',
       stream: true
     })
 
     return c.streamText(async (stream) => {
       for await (const message of chatStream) {
-        await stream.write(message.choices[0]?.delta.content ?? '')
+        const text = message.choices[0]?.delta.content ?? ''
+        await Promise.all(
+          text.split('').map(async (s) => {
+            stream.write(s)
+            await stream.sleep(10)
+          })
+        )
       }
     })
   })
@@ -51,7 +50,6 @@ export const route = defineRoute<Env>((app) => {
 export default function Index(c: Context<Env>) {
   return (
     <div>
-      <p>Me: {PROMPT('')[0].content}</p>
       <Component baseURL={c.env.BASE_URL} />
     </div>
   )
