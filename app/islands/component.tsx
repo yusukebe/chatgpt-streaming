@@ -31,6 +31,7 @@ function messageReducer(state: Message[], action: Action): Message[] {
 export default function Component(props: { baseURL: string }) {
   const [userInput, setUserInput] = useState('')
   const [loading, setLoading] = useState(false)
+  const [typing, setTyping] = useState(false)
   const [messages, dispatch] = useReducer(messageReducer, [
     {
       role: 'user',
@@ -57,10 +58,14 @@ export default function Component(props: { baseURL: string }) {
       const reader = res.body.getReader()
       const decoder = new TextDecoder()
       let text = ''
+      setTyping(true)
 
       for (;;) {
         const { done, value } = await reader.read()
-        if (done) break
+        if (done) {
+          setTyping(false)
+          break
+        }
         const decodedChunk = decoder.decode(value, { stream: true })
         text += decodedChunk
 
@@ -101,7 +106,10 @@ export default function Component(props: { baseURL: string }) {
         {[...messages].reverse().map((message, i) => (
           <div key={i}>
             <b>{message.role === 'user' ? 'You' : 'AI'}</b>
-            <pre>{message.content}</pre>
+            <pre>
+              {message.content}
+              {typing && i === messages.length - 1 && <span className="loader">❚</span>}
+            </pre>
           </div>
         ))}
       </div>

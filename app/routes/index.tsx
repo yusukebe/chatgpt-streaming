@@ -38,8 +38,8 @@ export const route = defineRoute<Env>((app) => {
         const text = message.choices[0]?.delta.content ?? ''
         await Promise.all(
           Array.from(text).map(async (s) => {
-            stream.write(s)
-            await stream.sleep(10)
+            await stream.write(s)
+            await stream.sleep(20)
           })
         )
       }
