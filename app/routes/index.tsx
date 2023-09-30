@@ -37,7 +37,7 @@ export const route = defineRoute<Env>((app) => {
       for await (const message of chatStream) {
         const text = message.choices[0]?.delta.content ?? ''
         await Promise.all(
-          text.split('').map(async (s) => {
+          [...text].map(async (s) => {
             stream.write(s)
             await stream.sleep(10)
           })
