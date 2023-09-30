@@ -96,13 +96,20 @@ export default function Component(props: { baseURL: string }) {
   }
 
   return (
-    <div>
-      <div>
+    <>
+      <div id="message">
+        {[...messages].reverse().map((message, i) => (
+          <div key={i}>
+            <b>{message.role === 'user' ? 'You' : 'AI'}</b>
+            <pre>{message.content}</pre>
+          </div>
+        ))}
+      </div>
+      <div id="input-div">
         <form onSubmit={handleSubmit}>
           <input
             ref={inputRef}
             type="text"
-            style={{ width: '100%', marginRight: '2px' }}
             value={userInput}
             onChange={(e) => setUserInput((e.target as any).value)}
             disabled={loading}
@@ -110,12 +117,6 @@ export default function Component(props: { baseURL: string }) {
           <button type="submit">Send</button>
         </form>
       </div>
-      {messages.map((message, i) => (
-        <div key={i}>
-          <b>{message.role === 'user' ? 'You' : 'AI'}</b>
-          <pre>{message.content}</pre>
-        </div>
-      ))}
-    </div>
+    </>
   )
 }

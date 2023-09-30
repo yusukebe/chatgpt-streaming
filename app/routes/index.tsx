@@ -29,7 +29,7 @@ export const route = defineRoute<Env>((app) => {
 
     const chatStream = await openai.chat.completions.create({
       messages: body.messages,
-      model: 'gpt-3.5-turbo',
+      model: 'gpt-4',
       stream: true
     })
 
@@ -37,7 +37,7 @@ export const route = defineRoute<Env>((app) => {
       for await (const message of chatStream) {
         const text = message.choices[0]?.delta.content ?? ''
         await Promise.all(
-          [...text].map(async (s) => {
+          Array.from(text).map(async (s) => {
             stream.write(s)
             await stream.sleep(10)
           })
